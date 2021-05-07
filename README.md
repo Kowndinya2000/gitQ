@@ -41,7 +41,7 @@ In the GitQ folder,
 3. You will see visual badges augumented to the repository page.  
 
 ## Demonstration Video of GitQ:
-The demonstration video can be found on Youtube using the following link:
+The demonstration video can be found in the following link:
 https://drive.google.com/drive/folders/1zUYWFxq-RsmvL0XmaNwnv4okTIS-W8jD?usp=sharing
 
 ## How to contribute to GitQ
