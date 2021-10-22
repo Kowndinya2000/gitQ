@@ -24,7 +24,7 @@ In the GitQ folder,
 "background.js" file contains all the source code related to analyzing repository and displaying badges.
 "manifest.json" file includes the url that triggers start of GitQ.
 
-## Steps to install GitQ:
+## Steps to install GitQ's Plugin:
 1. Download the repository on your local machine.  
 2. Unzip the folder and extract it to a location of your choice on your PC.  
 3. Now, open Google Chrome and Go to Settings  
@@ -36,9 +36,10 @@ In the GitQ folder,
 9. GitQ Plugin gets installed on Chrome.  
 
 ## Steps to use GitQ:
-1. Navigate to GitHub (https://github.com/)  
-2. Navigate to any repository of your choice.   
-3. You will see visual badges augumented to the repository page.  
+1. Open the folder ```server```, and follow the instructions as stated in its Readme (https://github.com/gitq-for-github/plugin/blob/master/server/README.md)  
+2. Navigate to GitHub (https://github.com/)  
+3. Navigate to repository for which the metric-assessment is done via server.   
+4. You will see visual badges augumented to the repository page.  
 
 
 ## How to contribute to GitQ

@@ -3,7 +3,7 @@
 ````
 pip install -r requirements.txt
 ````
-> 2. Download ```gh```
+> 2. Install ```gh```
 ````
 https://github.com/cli/cli#installation
 ````
@@ -41,7 +41,7 @@ chmod +x *sh
 chmod +x *sh
 ./empty.sh
 (This also deletes the database file. Only retains the usable tool template)
-Follow the steps 4-9 again.  
+Follow the steps 3-6 again.  
 ````
 > 10. To run a particular repository.
 ````
