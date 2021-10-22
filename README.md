@@ -36,7 +36,7 @@ In the GitQ folder,
 9. GitQ Plugin gets installed on Chrome.  
 
 ## Steps to use GitQ:
-1. Open the folder ```server```, and follow the instructions as stated in its [Readme] (https://github.com/gitq-for-github/plugin/blob/master/server/README.md)  
+1. Open the folder ```server```, and follow the instructions as stated in its (Readme) [https://github.com/gitq-for-github/plugin/blob/master/server/README.md]
 2. Navigate to GitHub (https://github.com/)  
 3. Navigate to repository for which the metric-assessment is done via server.   
 4. You will see visual badges augumented to the repository page.  
