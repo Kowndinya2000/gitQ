@@ -1,10 +1,10 @@
 # GitQ
 
 ## What is GitQ?
-GitQ is a Chrome plugin, to augment GitHub with badges that deliver visual cues quantifying the
+GitQ has a Chrome plugin to augment GitHub with badges that deliver visual cues quantifying the
 project’s architecture and maintenance.
 
-## Features of GitQ:
+## Features of GitQ Plugins:
 1. Analyzes the repository with respect to 6 source code metrics and 4 maintenance metrics
 2. Metrics and their scores are shown as badges
 3. Insight icons are displayed at the end to provide additional information about each maintenance metric
@@ -40,9 +40,6 @@ In the GitQ folder,
 2. Navigate to any repository of your choice.   
 3. You will see visual badges augumented to the repository page.  
 
-## Demonstration Video of GitQ:
-The demonstration video can be found in the following link:
-https://drive.google.com/drive/folders/1zUYWFxq-RsmvL0XmaNwnv4okTIS-W8jD?usp=sharing
 
 ## How to contribute to GitQ
 We will be very happy to receive any kind of contributions. Incase of a bug or an enhancement idea or a feature improvement idea, please open an issue or a pull request. Incase of any queries or if you would like to give any suggestions, please feel free to contact Akhila Sri Manasa Venigalla (cs19d504@iittp.ac.in) or Kowndinya Boyalakuntla (cs17b032@iittp.ac.in) or Sridhar Chimalakonda (ch@iittp.ac.in) of RISHA Lab, IIT Tirupati, India.
