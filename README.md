@@ -13,7 +13,7 @@ project’s architecture and maintenance.
 GitQ is aimed to effectively improve developers' experience while using Github and assist them to identify the right repository to fork and use or to contribute to.
 
 ## Overview diagram of GitQ:
-<img alt="approach" src="https://kowndinya2000.github.io/gitq-resources.github.io/GitQ-Overview2.png">
+<img alt="approach" src="https://kowndinya2000.github.io/buffer-2.github.io/GitQ-workflow.png">
 
 
 ## Snapshot of GitQ Assessment Report:
