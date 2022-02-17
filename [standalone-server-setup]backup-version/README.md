@@ -1,4 +1,4 @@
-# GitQ
+# GitQ-BACKUP VERSION
 
 ## What is GitQ?
 GitQ has a Chrome plugin to augment GitHub with badges that deliver visual cues quantifying the
@@ -12,12 +12,12 @@ project’s architecture and maintenance.
 ## Uses of GitQ:
 GitQ is aimed to effectively improve developers' experience while using Github and assist them to identify the right repository to fork and use or to contribute to.
 
-## Overview diagram of GitQ:
+## Overview diagram of GitQ (Backup Version with Server & Plugin dissociated as separate unconnected entities):
 <img alt="approach" src="https://kowndinya2000.github.io/buffer-2.github.io/GitQ-workflow2.png">
 
 
 ## Snapshot of GitQ Assessment Report:
-<img alt="assesment-report" src="https://kowndinya2000.github.io/gitq-resources.github.io/GitQ-ICPC-architecture.png">
+<img alt="assesment-report" src="https://kowndinya2000.github.io/gitq-resources.github.io/assessment-report-short.png">
 
 ## What's inside GitQ Repository:
 In the GitQ folder,   
@@ -36,9 +36,10 @@ In the GitQ folder,
 9. GitQ Plugin gets installed on Chrome.  
 
 ## Steps to use GitQ:
-1. Navigate to GitHub (https://github.com/)  
-2. Navigate to repository for which the metric-assessment is done automatically.   
-3. You will see visual badges augumented to the repository page.  
+1. Open the folder ```server```, and follow the instructions as stated in its [Readme.](https://github.com/gitq-for-github/plugin/blob/master/server/README.md)
+2. Navigate to GitHub (https://github.com/)  
+3. Navigate to repository for which the metric-assessment is done via server.   
+4. You will see visual badges augumented to the repository page.  
 
 
 ## How to contribute to GitQ
