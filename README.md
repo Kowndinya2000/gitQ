@@ -13,11 +13,11 @@ project’s architecture and maintenance.
 GitQ is aimed to effectively improve developers' experience while using Github and assist them to identify the right repository to fork and use or to contribute to.
 
 ## Overview diagram of GitQ:
-<img alt="approach" src="https://kowndinya2000.github.io/buffer-2.github.io/GitQ-workflow2.png">
+<img alt="approach" src="https://kowndinya2000.github.io/gitq-resources.github.io/GitQ-ICPC-architecture.png">
 
 
 ## Snapshot of GitQ Assessment Report:
-<img alt="assesment-report" src="https://kowndinya2000.github.io/gitq-resources.github.io/GitQ-ICPC-architecture.png">
+<img alt="assesment-report" src="https://kowndinya2000.github.io/gitq-resources.github.io/assessment-report-short.png">
 
 ## What's inside GitQ Repository:
 In the GitQ folder,   
@@ -37,7 +37,7 @@ In the GitQ folder,
 
 ## Steps to use GitQ:
 1. Navigate to GitHub (https://github.com/)  
-2. Navigate to repository for which the metric-assessment is done automatically.   
+2. Navigate to any repository of interest.   
 3. You will see visual badges augumented to the repository page.  
 
 
