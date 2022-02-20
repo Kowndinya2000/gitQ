@@ -1,4 +1,4 @@
-# GitQ
+# GitQ [For now please use the alternate backup version of the code to run GitQ as https://services.iittp.ac.in will be down for quite sometime.]
 
 ## What is GitQ?
 GitQ has a Chrome plugin to augment GitHub with badges that deliver visual cues quantifying the
