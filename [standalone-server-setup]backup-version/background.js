@@ -901,9 +901,11 @@ function starter() {
 var entire_code;
 var commit_url;
 var latest_commit;
-entire_code = document.getElementsByClassName("Box mb-3")[0].innerHTML;
-commit_url = document.getElementsByClassName("f6 Link--secondary text-mono ml-2 d-none d-lg-inline")[0].href
-latest_commit = commit_url.split("/")[6]
-console.log(latest_commit)
 
-starter();
+setTimeout(() => {
+  entire_code = document.getElementsByClassName("Box mb-3")[0].innerHTML;
+  commit_url = document.getElementsByClassName("f6 Link--secondary text-mono ml-2 d-none d-lg-inline")[0].href
+  latest_commit = commit_url.split("/")[6]
+  console.log(latest_commit)
+  starter();
+}, 1500);
