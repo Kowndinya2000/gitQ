@@ -86,12 +86,12 @@ loading_buffer = `
       `;
 
 function cacheStore(metric_string) {
-    // caching the commit_id for 1000 days, but that can be modified accordingly
-    write_metric_values(metric_string)
-    var today = new Date();
-    today.setTime(today.getTime() + (1000 * 24 * 60 * 60 * 1000));
-    var cookieExpiration = "cookieExpiration=" + today.toUTCString();
-    document.cookie = latest_commit + "=" + metric_string + ";" + cookieExpiration + ";path=/";
+  // caching the commit_id for 1000 days, but that can be modified accordingly
+  write_metric_values(metric_string)
+  var today = new Date();
+  today.setTime(today.getTime() + (1000 * 24 * 60 * 60 * 1000));
+  var cookieExpiration = "cookieExpiration=" + today.toUTCString();
+  document.cookie = latest_commit + "=" + metric_string + ";" + cookieExpiration + ";path=/";
 }
 var badges_final = `
               <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -650,260 +650,485 @@ var badges_final = `
               
                                  `;
 function add_insights() {
-    var bug_insight = "";
-    var bugs = document.getElementById('bugs').innerHTML.split(" : ");
-    var open_bugs = parseInt(bugs[0]);
-    var closed_bugs = parseInt(bugs[1]);
-    if (closed_bugs >= (2 * open_bugs)) {
-        bug_insight = `
+  var bug_insight = "";
+  var bugs = document.getElementById('bugs').innerHTML.split(" : ");
+  var open_bugs = parseInt(bugs[0]);
+  var closed_bugs = parseInt(bugs[1]);
+  if (closed_bugs >= (2 * open_bugs)) {
+    bug_insight = `
                                           <div class="icon icon__safe" style="margin-left: 43rem;" >
                                           <div style="font-family: 'Varela Round', sans-serif;" class="insight insight__safe">
                                               Excellent bug handling. Project is safe. 
                                           </div>
                                           <img style="width: 2rem;height: 2rem;" src="https://img.icons8.com/nolan/64/bug.png"/>
                                       </div>`;
-    }
-    else if (closed_bugs < open_bugs) {
-        bug_insight = `
+  }
+  else if (closed_bugs < open_bugs) {
+    bug_insight = `
                                           <div class="icon icon__ok" style="margin-left: 43rem;" >
                                           <div style="font-family: 'Varela Round', sans-serif;" class="insight insight__ok">
                                               Good bug handling. Good to go about using the project. 
                                           </div>
                                           <img style="width: 2rem;height: 2rem;" src="https://img.icons8.com/nolan/64/bug.png"/>
                                       </div>`;
-    }
-    else {
-        bug_insight = `
+  }
+  else {
+    bug_insight = `
                                           <div class="icon icon__danger" style="margin-left: 43rem;">
                                           <div style="font-family: 'Varela Round', sans-serif;" class="insight insight__danger">
                                               Poor bug handling - Could you take a step to resolve one of the bugs? 
                                           </div>
                                           <img style="width: 2rem;height: 2rem;" src="https://img.icons8.com/nolan/64/bug.png"/>
                                       </div>`;
-    }
-    var file_insight = ""
-    var ifiles = parseInt(document.getElementById('impacted_files').innerHTML.split("%")[0]);
-    console.log(ifiles)
-    if (ifiles <= 10) {
-        file_insight = `
+  }
+  var file_insight = ""
+  var ifiles = parseInt(document.getElementById('impacted_files').innerHTML.split("%")[0]);
+  console.log(ifiles)
+  if (ifiles <= 10) {
+    file_insight = `
                                           <div class="icon icon__safe" style="margin-left: 10rem;" >
                                           <div style="font-family: 'Varela Round', sans-serif;" class="insight insight__safe">
                                               Greatly modularized. New version will minimally affect the project. 
                                           </div>
                                           <img style="width: 2rem;height: 2rem;" src="https://img.icons8.com/color/48/000000/code-file.png"/>
                                       </div>`;
-    }
-    else if (ifiles >= 11) {
-        if (ifiles > 40) {
-            file_insight = `
+  }
+  else if (ifiles >= 11) {
+    if (ifiles > 40) {
+      file_insight = `
                                               <div class="icon icon__danger" style="margin-left: 10rem;">
                                               <div style="font-family: 'Varela Round', sans-serif;" class="insight insight__danger">
                                                   Heavy proportion of the project gets affected for every commit. Older versions may not be compatible. 
                                               </div>
                                               <img style="width: 2rem;height: 2rem;" src="https://img.icons8.com/color/48/000000/code-file.png"/>
                                           </div>`;
-        }
-        else {
-            file_insight = `
+    }
+    else {
+      file_insight = `
                                               <div class="icon icon__ok" style="margin-left: 10rem;">
                                               <div style="font-family: 'Varela Round', sans-serif;" class="insight insight__ok">
                                                   Good modularization. Less than 40% of the project is affected for every commit. 
                                               </div>
                                               <img style="width: 2rem;height: 2rem;" src="https://img.icons8.com/color/48/000000/code-file.png"/>
                                           </div>`;
-        }
     }
-    var loc_insight = "";
-    var iloc = parseInt(document.getElementById('impacted_loc').innerHTML.split("%")[0]);
-    if (iloc < 16) {
-        loc_insight = `
+  }
+  var loc_insight = "";
+  var iloc = parseInt(document.getElementById('impacted_loc').innerHTML.split("%")[0]);
+  if (iloc < 16) {
+    loc_insight = `
                                           <div class="icon icon__safe" style="margin-left: 10rem;">
                                           <div style="font-family: 'Varela Round', sans-serif;" class="insight insight__safe">
                                               Well coded. New version will minimally affect the code inside the files of the project. 
                                           </div>
                                           <img style="width: 2rem;height: 2rem;" src="https://img.icons8.com/pastel-glyph/64/000000/code--v1.png"/>
                                       </div>`;
-    }
-    else if (iloc >= 16) {
-        if (iloc < 50) {
-            loc_insight = `   
+  }
+  else if (iloc >= 16) {
+    if (iloc < 50) {
+      loc_insight = `   
                                               <div class="icon icon__ok" style="margin-left: 10rem;">
                                               <div style="font-family: 'Varela Round', sans-serif;" class="insight insight__ok">
                                                   Good code composition. Less than 50% of code in a file is affected for every commit.
                                               </div>
                                               <img style="width: 2rem;height: 2rem;" src="https://img.icons8.com/pastel-glyph/64/000000/code--v1.png"/>
                                           </div>`;
-        }
-        else {
-            loc_insight = `   
+    }
+    else {
+      loc_insight = `   
                                               <div class="icon icon__danger" style="margin-left: 10rem;">
                                               <div style="font-family: 'Varela Round', sans-serif;" class="insight insight__danger">
                                                   Poor code composition. Atleast 50% of the code is affected for every commit.
                                               </div>
                                               <img style="width: 2rem;height: 2rem;" src="https://img.icons8.com/pastel-glyph/64/000000/code--v1.png"/>
                                           </div>`;
-        }
-
     }
-    var contribution_insight = "";
-    var active_contr = parseInt(document.getElementById('active').innerHTML.split("%")[0]);
-    if (active_contr <= 10) {
-        contribution_insight = `   
+
+  }
+  var contribution_insight = "";
+  var active_contr = parseInt(document.getElementById('active').innerHTML.split("%")[0]);
+  if (active_contr <= 10) {
+    contribution_insight = `   
                                           <div class="icon icon__danger" style="margin-left: 10rem;">
                                           <div style="font-family: 'Varela Round', sans-serif;" class="insight insight__danger">
                                               Fairly inactive community. Less than 10% of the authors remain active at any time.
                                           </div>
                                           <img style="width: 2rem;height: 2rem;" src="https://img.icons8.com/color/48/000000/myspace.png"/>
                                       </div>`;
-    }
-    else if (active_contr >= 11) {
-        if (active_contr > 50) {
-            contribution_insight = `   
+  }
+  else if (active_contr >= 11) {
+    if (active_contr > 50) {
+      contribution_insight = `   
                                               <div class="icon icon__ok" style="margin-left: 10rem;">
                                               <div style="font-family: 'Varela Round', sans-serif;" class="insight insight__ok">
                                                   Highly active community. Atleast 50% of the authors remain active at any time.
                                               </div>
                                               <img style="width: 2rem;height: 2rem;" src="https://img.icons8.com/color/48/000000/myspace.png"/>
                                           </div>`;
-        }
-        else {
-            contribution_insight = `   
+    }
+    else {
+      contribution_insight = `   
                                               <div class="icon icon__ok" style="margin-left: 10rem;">
                                               <div style="font-family: 'Varela Round', sans-serif;" class="insight insight__ok">
                                                   Fairly active community. Atleast 10% of the authors remain active at any time.
                                               </div>
                                               <img style="width: 2rem;height: 2rem;" src="https://img.icons8.com/color/48/000000/myspace.png"/>
                                           </div>`;
-        }
-
     }
-    document.getElementById('insight_box').innerHTML = `<div class="icon-box">` + bug_insight + file_insight + loc_insight + contribution_insight + `</div>`;
+
+  }
+  document.getElementById('insight_box').innerHTML = `<div class="icon-box">` + bug_insight + file_insight + loc_insight + contribution_insight + `</div>`;
 }
 
 function write_metric_values(metric_string) {
-    var response = JSON.parse(metric_string)
-    document.getElementById('bugs').style.background = '#ff0062'
-    document.getElementById('bugs').innerHTML = response["Open_Bugs"] + " : " + response["Closed_Bugs"]
-    var Code_Impact;
-    if (response["Code_Impact"] == "") {
-        Code_Impact = 0
+  var response = JSON.parse(metric_string)
+  document.getElementById('bugs').style.background = '#ff0062'
+  document.getElementById('bugs').innerHTML = response["Open_Bugs"] + " : " + response["Closed_Bugs"]
+  var Code_Impact;
+  if (response["Code_Impact"] == "") {
+    Code_Impact = 0
+  }
+  Code_Impact = parseFloat(response["Code_Impact"])
+  Code_Impact = Code_Impact.toFixed(2);
+  Code_Impact = Code_Impact.toString()
+  document.getElementById('impacted_files').innerHTML = Code_Impact + "%"
+  document.getElementById('impacted_files').style.background = '#feb60a'
+  var Code_churn;
+  if (response["Code_churn"] == "") {
+    Code_churn = 0
+  }
+  Code_churn = parseFloat(response["Code_Churn"])
+  Code_churn = Code_churn.toFixed(2);
+  Code_churn = Code_churn.toString()
+  document.getElementById('impacted_loc').innerHTML = Code_churn + "%"
+  document.getElementById('impacted_loc').style.background = '#feb60a'
+  var Percentage_Active_Contributors;
+  if (response["Percentage_Active_Contributors"] == "") {
+    Percentage_Active_Contributors = 0
+  }
+  Percentage_Active_Contributors = parseFloat(response["Percentage_Active_Contributors"])
+  Percentage_Active_Contributors = Percentage_Active_Contributors.toFixed(2);
+  Percentage_Active_Contributors = Percentage_Active_Contributors.toString()
+  document.getElementById('active').innerHTML = Percentage_Active_Contributors + "%"
+  document.getElementById('active').style.background = '#ff0062'
+  document.getElementById('f1').innerHTML = response["N_Pack"]
+  document.getElementById('f1').style.background = '#feb60a'
+  document.getElementById('f2').innerHTML = response["D_Pack"]
+  document.getElementById('f2').style.background = '#feb60a'
+  document.getElementById('f3').innerHTML = response["N_Methods"]
+  document.getElementById('f3').style.background = '#ff0062'
+  document.getElementById('f4').innerHTML = response["O_Methods"]
+  document.getElementById('f4').style.background = '#ff0062'
+  document.getElementById('f5').innerHTML = response["N_Class"]
+  document.getElementById('f5').style.background = '#44CC11'
+  document.getElementById('f6').innerHTML = response["I_Class"]
+  document.getElementById('f6').style.background = '#44CC11'
+  add_insights()
+}
+function analyze_boc() {
+  var user_repo = window.location.href.replace("https://github.com/", "");
+  var req_url = "https://services.iittp.ac.in/gitq/openclose/" + user_repo + "/" + latest_commit
+  console.log(req_url)
+  document.body.style.background = "#ffffff";
+  setTimeout(() => {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log("Bug Issues Open & Closed Metric Analysis Completed successfully")
+        var boc = JSON.parse(this.responseText)
+        console.log(boc)
+        document.getElementById('bugs').style.background = '#ff0062'
+        document.getElementById('bugs').innerHTML = boc["Open_Bugs"] + " : " + boc["Closed_Bugs"]
+      } else {
+        console.log("Problems in calculating Bug Issues metric")
+      }
     }
-    Code_Impact = parseFloat(response["Code_Impact"])
-    Code_Impact = Code_Impact.toFixed(2);
-    Code_Impact = Code_Impact.toString()
-    document.getElementById('impacted_files').innerHTML = Code_Impact + "%"
-    document.getElementById('impacted_files').style.background = '#feb60a'
-    var Code_churn;
-    if (response["Code_churn"] == "") {
-        Code_churn = 0
+    xhttp.open("POST", req_url, "true");
+    xhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
+    xhttp.send('boc_request');
+  }, 300);
+
+}
+
+function analyze_aar() {
+  var repoN = window.location.href.replace("https://github.com/", "").split("/")[1];
+  var req_url = "https://services.iittp.ac.in/gitq/active/" + repoN + "/" + latest_commit
+  console.log(req_url)
+  document.body.style.background = "#ffffff";
+  setTimeout(() => {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log("Active Authors Rate Metrics Analysis Complete successfully")
+        var aar = JSON.parse(this.responseText)
+        console.log(aar)
+        var Percentage_Active_Contributors;
+        if (aar["Percentage_Active_Contributors"] == "") {
+          Percentage_Active_Contributors = 0
+        }
+        Percentage_Active_Contributors = parseFloat(aar["Percentage_Active_Contributors"])
+        Percentage_Active_Contributors = Percentage_Active_Contributors.toFixed(2);
+        Percentage_Active_Contributors = Percentage_Active_Contributors.toString()
+        document.getElementById('active').innerHTML = Percentage_Active_Contributors + "%"
+        document.getElementById('active').style.background = '#ff0062'
+      } else {
+        console.log("Problems in calculating Active Authors Rate metric")
+      }
     }
-    Code_churn = parseFloat(response["Code_Churn"])
-    Code_churn = Code_churn.toFixed(2);
-    Code_churn = Code_churn.toString()
-    document.getElementById('impacted_loc').innerHTML = Code_churn + "%"
-    document.getElementById('impacted_loc').style.background = '#feb60a'
-    var Percentage_Active_Contributors;
-    if (response["Percentage_Active_Contributors"] == "") {
-        Percentage_Active_Contributors = 0
+    xhttp.open("POST", req_url, "true");
+    xhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
+    xhttp.send('aar_request');
+  }, 300);
+
+}
+
+
+function analyze_po() {
+  var repoN = window.location.href.replace("https://github.com/", "").split("/")[1];
+  var req_url = "https://services.iittp.ac.in/gitq/efficiency/" + repoN + "/" + latest_commit
+  console.log(req_url)
+  document.body.style.background = "#ffffff";
+  setTimeout(() => {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log("Portion Impacted Metrics Analysis Complete successfully")
+        var po = JSON.parse(this.responseText)
+        console.log(po)
+        var Code_Impact;
+        if (po["Code_Impact"] == "") {
+          Code_Impact = 0
+        }
+        Code_Impact = parseFloat(po["Code_Impact"])
+        Code_Impact = Code_Impact.toFixed(2);
+        Code_Impact = Code_Impact.toString()
+        document.getElementById('impacted_files').innerHTML = Code_Impact + "%"
+        document.getElementById('impacted_files').style.background = '#feb60a'
+        var Code_churn;
+        if (po["Code_churn"] == "") {
+          Code_churn = 0
+        }
+        Code_churn = parseFloat(po["Code_Churn"])
+        Code_churn = Code_churn.toFixed(2);
+        Code_churn = Code_churn.toString()
+        document.getElementById('impacted_loc').innerHTML = Code_churn + "%"
+        document.getElementById('impacted_loc').style.background = '#feb60a'
+       } else {
+        console.log("Problems in calculating portion impacted metrics")
+       }
     }
-    Percentage_Active_Contributors = parseFloat(response["Percentage_Active_Contributors"])
-    Percentage_Active_Contributors = Percentage_Active_Contributors.toFixed(2);
-    Percentage_Active_Contributors = Percentage_Active_Contributors.toString()
-    document.getElementById('active').innerHTML = Percentage_Active_Contributors + "%"
-    document.getElementById('active').style.background = '#ff0062'
-    document.getElementById('f1').innerHTML = response["N_Pack"]
-    document.getElementById('f1').style.background = '#feb60a'
-    document.getElementById('f2').innerHTML = response["D_Pack"]
-    document.getElementById('f2').style.background = '#feb60a'
-    document.getElementById('f3').innerHTML = response["N_Methods"]
-    document.getElementById('f3').style.background = '#ff0062'
-    document.getElementById('f4').innerHTML = response["O_Methods"]
-    document.getElementById('f4').style.background = '#ff0062'
-    document.getElementById('f5').innerHTML = response["N_Class"]
-    document.getElementById('f5').style.background = '#44CC11'
-    document.getElementById('f6').innerHTML = response["I_Class"]
-    document.getElementById('f6').style.background = '#44CC11'
-    add_insights()
+    xhttp.open("POST", req_url, "true");
+    xhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
+    xhttp.send('po_request');
+  }, 300);
+
+}
+
+function analyze_scm() {
+  var repoN = window.location.href.replace("https://github.com/", "").split("/")[1];
+  var req_url = "https://services.iittp.ac.in/gitq/source/" + repoN + "/" + latest_commit
+  console.log(req_url)
+  document.body.style.background = "#ffffff";
+  setTimeout(() => {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log("Source Code Metric Analysis Complete successfully")
+        var scm = JSON.parse(this.responseText)
+        console.log(scm)
+        document.getElementById('f1').innerHTML = scm["N_Pack"]
+        document.getElementById('f1').style.background = '#feb60a'
+        document.getElementById('f2').innerHTML = scm["D_Pack"]
+        document.getElementById('f2').style.background = '#feb60a'
+        document.getElementById('f3').innerHTML = scm["N_Methods"]
+        document.getElementById('f3').style.background = '#ff0062'
+        document.getElementById('f4').innerHTML = scm["O_Methods"]
+        document.getElementById('f4').style.background = '#ff0062'
+        document.getElementById('f5').innerHTML = scm["N_Class"]
+        document.getElementById('f5').style.background = '#44CC11'
+        document.getElementById('f6').innerHTML = scm["I_Class"]
+        document.getElementById('f6').style.background = '#44CC11'
+      } else {
+        console.log("Problems in calculating source code metrics")
+      }
+    }
+    xhttp.open("POST", req_url, "true");
+    xhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
+    xhttp.send('scm_request');
+  }, 300);
+
+}
+
+
+function download_repository() {
+  document.getElementsByClassName("Box mb-3")[0].innerHTML = downloading_buffer + entire_code;
+  var user_repo = window.location.href.replace("https://github.com/", "");
+  var req_url = "https://services.iittp.ac.in/gitq/download/" + user_repo + "/" + latest_commit + "/" + branchr
+  console.log(req_url)
+  document.body.style.background = "#ffffff";
+  setTimeout(() => {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        if (this.responseText == "true") {
+          console.log("Repo has been downloaded successfully")
+          document.getElementsByClassName("Box mb-3")[0].innerHTML = badges_final + entire_code;
+          analyze_scm()
+          setTimeout(() => {
+            analyze_aar()
+          }, 1000);
+          setTimeout(() => {
+            analyze_po()
+          }, 2000);
+          setTimeout(() => {
+            analyze_boc()
+          }, 2500);
+        } else {
+          console.log("Problems in downloading the repo!")
+        }
+
+      }
+    }
+    xhttp.open("POST", req_url, "true");
+    xhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
+    xhttp.send('download_request');
+  }, 3000);
+
 }
 
 function fetch_from_database() {
-    document.getElementsByClassName("Box mb-3")[0].innerHTML = loading_buffer + entire_code;
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            if (this.responseText != "False") {
-                document.getElementsByClassName("Box mb-3")[0].innerHTML = badges_final + entire_code;
-                setTimeout(() => {
-                    cacheStore(this.responseText)
-                }, 800);
-            }
-            else {
-                // console.log(this.status)
-                document.getElementsByClassName("Box mb-3")[0].innerHTML = '<iframe style="margin-bottom:2rem;width:100%;height:25rem;border:none;" src="https://kowndinya2000.github.io/buffer-2.github.io/analyze-now.html"></iframe>' + entire_code;
+  document.getElementsByClassName("Box mb-3")[0].innerHTML = loading_buffer + entire_code;
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      if (this.responseText != "False") {
+        document.getElementsByClassName("Box mb-3")[0].innerHTML = badges_final + entire_code;
+        setTimeout(() => {
+          // cacheStore(this.responseText)
+        }, 800);
+      }
+      else {
+        // console.log(this.status)
+        download_repository()
+        // document.getElementsByClassName("Box mb-3")[0].innerHTML = '<iframe style="margin-bottom:2rem;width:100%;height:25rem;border:none;" src="https://kowndinya2000.github.io/buffer-2.github.io/analyze-now.html"></iframe>' + entire_code;
 
-            }
-        } else {
-            document.getElementsByClassName("Box mb-3")[0].innerHTML = '<iframe style="margin-bottom:2rem;width:100%;height:18rem;border:none;" src="https://kowndinya2000.github.io/buffer-2.github.io/restart-dynos.html"></iframe>' + entire_code;
-        }
+      }
+    } else {
+      document.getElementsByClassName("Box mb-3")[0].innerHTML = '<iframe style="margin-bottom:2rem;width:100%;height:18rem;border:none;" src="https://kowndinya2000.github.io/buffer-2.github.io/restart-dynos.html"></iframe>' + entire_code;
     }
-    xhttp.open("POST", "https://gitq.herokuapp.com/read_database", "true");
-    xhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
-    xhttp.send('commit_id=' + latest_commit);
+  }
+  xhttp.open("POST", "https://gitq.herokuapp.com/read_database", "true");
+  xhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
+  xhttp.send('commit_id=' + latest_commit);
 }
 function fetch_from_cache() {
-    document.getElementsByClassName("Box mb-3")[0].innerHTML = loading_buffer_cache + entire_code;
-    if (browseCache(latest_commit)) {
-        setTimeout(() => {
-            document.getElementsByClassName("Box mb-3")[0].innerHTML = badges_final + entire_code;
-            metric_string = getCache(latest_commit)
-            write_metric_values(metric_string)
-            console.log("Cache contains metric values")
-        }, 800);
-    } else {
-        console.log("Did not find anything in cache")
-        fetch_from_database()
-
-    }
+  document.getElementsByClassName("Box mb-3")[0].innerHTML = loading_buffer_cache + entire_code;
+  if (browseCache(latest_commit)) {
+    setTimeout(() => {
+      document.getElementsByClassName("Box mb-3")[0].innerHTML = badges_final + entire_code;
+      metric_string = getCache(latest_commit)
+      write_metric_values(metric_string)
+      console.log("Cache contains metric values")
+    }, 800);
+  } else {
+    console.log("Did not find anything in cache")
+    fetch_from_database()
+  }
 }
 
 function getCache(commit_id) {
-    var commitKey = commit_id + "=";
-    var decodedCommitCookie = decodeURIComponent(document.cookie);
-    var commitSplit = decodedCommitCookie.split(';');
-    for (var iter = 0; iter < commitSplit.length; iter++) {
-        var arr = commitSplit[iter];
-        while (arr.charAt(0) == ' ') {
-            arr = arr.substring(1);
-        }
-        if (arr.indexOf(commitKey) == 0) {
-            return arr.substring(commitKey.length, arr.length);
-        }
+  var commitKey = commit_id + "=";
+  var decodedCommitCookie = decodeURIComponent(document.cookie);
+  var commitSplit = decodedCommitCookie.split(';');
+  for (var iter = 0; iter < commitSplit.length; iter++) {
+    var arr = commitSplit[iter];
+    while (arr.charAt(0) == ' ') {
+      arr = arr.substring(1);
     }
-    return "";
+    if (arr.indexOf(commitKey) == 0) {
+      return arr.substring(commitKey.length, arr.length);
+    }
+  }
+  return "";
 }
 
 function browseCache(commit_id) {
-    var commitInfo = getCache(commit_id);
-    if (commitInfo != "") {
-        return true
-    }
-    return false
+  var commitInfo = getCache(commit_id);
+  if (commitInfo != "") {
+    return true
+  }
+  return false
 }
 
 function starter() {
-    url_string = window.location.href;
-    document.body.style.background = "#ffffff";
-    setTimeout(() => {
-        fetch_from_cache()
-    }, 3000);
-    document.getElementsByClassName("Box mb-3")[0].innerHTML = '<iframe style="margin-bottom:2rem;width:100%;height:18rem;border:none;" src="https://kowndinya2000.github.io/loader.github.io/"></iframe>' + entire_code;
+  url_string = window.location.href;
+  document.body.style.background = "#ffffff";
+  setTimeout(() => {
+    fetch_from_cache()
+  }, 3000);
+  document.getElementsByClassName("Box mb-3")[0].innerHTML = '<iframe style="margin-bottom:2rem;width:100%;height:18rem;border:none;" src="https://kowndinya2000.github.io/loader.github.io/"></iframe>' + entire_code;
 }
+
 var entire_code;
 var commit_url;
 var latest_commit;
-entire_code = document.getElementsByClassName("Box mb-3")[0].innerHTML;
-commit_url = document.getElementsByClassName("f6 Link--secondary text-mono ml-2 d-none d-lg-inline")[0].href
-latest_commit = commit_url.split("/")[6]
-console.log(latest_commit)
+var branchr;
+var downloading_buffer = `
+<style>
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+h2 {
+    font-family: 'Muli', sans-serif;
+    letter-spacing: 1px;
+    margin: 10px 0;
+    animation: animate  
+    1.5s linear infinite; 
+    }
+    p{
+        font-family: 'Muli', sans-serif;
+    }
+        
+@keyframes animate { 
+0% { 
+    opacity: 0; 
+} 
 
-starter();
+50% { 
+    opacity: 0.7; 
+} 
+
+100% { 
+    opacity: 0; 
+} 
+} 
+</style>
+<div style="background: #B8F9D3;">
+<iframe style="width:100%;height:15rem;border:none;" src="https://kowndinya2000.github.io/buffer-2.github.io/">
+</iframe>
+<div style="margin-bottom: 2rem;height: 6rem;">
+    <p style="text-align: center;">Contacted the remote server</p>
+    <h2 style="text-align: center;">
+        Downloading the repository ....
+    </h2>
+</div>
+
+
+</div>
+`;
+setTimeout(() => {
+  entire_code = document.getElementsByClassName("Box mb-3")[0].innerHTML;
+  commit_url = document.getElementsByClassName("f6 Link--secondary text-mono ml-2 d-none d-lg-inline")[0].href
+  latest_commit = commit_url.split("/")[6]
+  var anchs = document.getElementsByTagName("a")
+  for (let index = 0; index < anchs.length; index++) {
+    if (anchs[index].href.includes(window.location.href + "/find/")) {
+      branchr = anchs[index].href.split("/find/")[1]
+      break
+    } else if (anchs[index].href.includes(window.location.href.replace("https://github.com", "") + "/find/")) {
+      branchr = anchs[index].href.split("/find/")[1]
+      break
+    }
+  }
+  console.log(latest_commit)
+  console.log(branchr)
+  starter();
+}, 1500);
