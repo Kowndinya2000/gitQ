@@ -842,6 +842,9 @@ function analyze_boc() {
       } else {
         console.log("Problems in calculating Bug Issues metric")
       }
+      setTimeout(() => {
+        delete_repo()
+      }, 1500);
     }
     xhttp.open("POST", req_url, "true");
     xhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
@@ -959,6 +962,27 @@ function analyze_scm() {
 
 }
 
+function delete_repo() {
+  add_insights()
+  var req_url = "https://services.iittp.ac.in/gitq/delete/" + latest_commit
+  console.log(req_url)
+  document.body.style.background = "#ffffff";
+  setTimeout(() => {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log("Repo Has been deleted Successfully")
+      } else {
+        console.log("Problems in deleting the repository in the remote server")
+      }
+    }
+    xhttp.open("POST", req_url, "true");
+    xhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
+    xhttp.send('delete_request');
+  }, 300);
+
+}
+
 
 function download_repository() {
   document.getElementsByClassName("Box mb-3")[0].innerHTML = downloading_buffer + entire_code;
@@ -983,6 +1007,7 @@ function download_repository() {
           setTimeout(() => {
             analyze_boc()
           }, 2500);
+         
         } else {
           console.log("Problems in downloading the repo!")
         }
