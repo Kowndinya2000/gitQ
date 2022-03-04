@@ -964,7 +964,8 @@ function add_insights_repeat() {
 function write_metric_values(metric_string) {
   var response = JSON.parse(metric_string)
   document.getElementById('bugs').style.background = '#ff0062'
-  document.getElementById('bugs').innerHTML = response["Open_Bugs"] + " : " + response["Closed_Bugs"]
+  document.getElementById('bugs').innerHTML = response["Bugs"] 
+  // + " : " + response["Closed_Bugs"]
   var Code_Impact;
   if (response["Code_Impact"] == "") {
     Code_Impact = 0
