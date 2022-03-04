@@ -89,7 +89,7 @@ function cacheStore(metric_string) {
   // caching the commit_id for 1000 days, but that can be modified accordingly
   console.log('Cache Store',metric_string)
   localStorage.setItem(latest_commit, metric_string)
-  write_metric_values(metric_string)
+  
   // var today = new Date();
   // today.setTime(today.getTime() + (1000 * 24 * 60 * 60 * 1000));
   // var cookieExpiration = "cookieExpiration=" + today.toUTCString();
@@ -1022,12 +1022,14 @@ function analyze_boc() {
         console.log(boc)
         document.getElementById('bugs').style.background = '#ff0062'
         document.getElementById('bugs').innerHTML = boc["Open_Bugs"] + " : " + boc["Closed_Bugs"]
+        setTimeout(() => {
+          delete_repo()
+        }, 1500);
       } else {
         console.log("Problems in calculating Bug Issues metric")
+        document.getElementById('bugs').style.background = '#ff0062'
+        document.getElementById('bugs').innerHTML =   "0 : 0"
       }
-      setTimeout(() => {
-        delete_repo()
-      }, 1500);
     }
     xhttp.send('boc_request');
   }, 300);
@@ -1145,22 +1147,22 @@ function analyze_scm() {
 
 function delete_repo() {
   add_insights()
-  var req_url = "https://services.iittp.ac.in/gitq/delete/" + latest_commit
-  console.log(req_url)
-  document.body.style.background = "#ffffff";
-  setTimeout(() => {
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", req_url, "true");
-    xhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
-    xhttp.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-        console.log("Repo Has been deleted Successfully")
-      } else {
-        console.log("Problems in deleting the repository in the remote server")
-      }
-    }
-    xhttp.send('delete_request');
-  }, 300);
+  // var req_url = "https://services.iittp.ac.in/gitq/delete/" + latest_commit
+  // console.log(req_url)
+  // document.body.style.background = "#ffffff";
+  // setTimeout(() => {
+  //   var xhttp = new XMLHttpRequest();
+  //   xhttp.open("POST", req_url, "true");
+  //   xhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
+  //   xhttp.onreadystatechange = function () {
+  //     if (this.readyState == 4 && this.status == 200) {
+  //       console.log("Repo Has been deleted Successfully")
+  //     } else {
+  //       console.log("Problems in deleting the repository in the remote server")
+  //     }
+  //   }
+  //   xhttp.send('delete_request');
+  // }, 300);
 
 }
 
@@ -1189,7 +1191,7 @@ function download_repository() {
           }, 2000);
           setTimeout(() => {
             analyze_boc()
-          }, 2500);
+          }, 3000);
 
         } else {
           console.log("Problems in downloading the repo!")
@@ -1213,6 +1215,7 @@ function fetch_from_database() {
         document.getElementsByClassName("Box mb-3")[0].innerHTML = badges_final + entire_code;
         setTimeout(() => {
           cacheStore(this.responseText)
+          write_metric_values(this.responseText)
           // generate badges on to screen 
           // add_insights()
         }, 800);
